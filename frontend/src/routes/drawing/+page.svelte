@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fabric } from 'fabric';
+  import basePetr from '../../assets/base_petr.png'
 
   let canvas: fabric.Canvas | undefined;
   let selectedColor = "#000000"; // Default color value
   let brushSize = 5; // Default brush size
+  let baseImageGroup: fabric.Group;
 
 
   onMount(() => {
@@ -17,6 +19,17 @@
 
     canvas.setWidth(width * canvas.getZoom());
     canvas.setHeight(width * canvas.getZoom());
+
+    fabric.Image.fromURL(basePetr, function(img: any) {
+        img.scaleToWidth(width);
+        img.scaleToWidth(width);
+        img.selectable = false;
+        baseImageGroup = new fabric.Group([img], {
+          selectable: false,
+        });
+        canvas.add(baseImageGroup)
+        canvas.renderAll()
+    });
   });
 
   const getWidth = () => {
@@ -47,8 +60,10 @@
 
   // Function to clear the canvas
   function clearCanvas() {
-    if (canvas) {
-      canvas.clear();
+    if (canvas && baseImageGroup) {
+      canvas.remove(...canvas.getObjects()); // Remove all objects on the canvas
+      canvas.add(baseImageGroup); // Add the base image group back to the canvas
+      canvas.renderAll();
     }
   }
 </script>

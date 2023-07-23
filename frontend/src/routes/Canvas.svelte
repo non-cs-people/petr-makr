@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { fabric } from 'fabric';
   
-    let canvas: fabric.Canvas | undefined;
+    export let canvas: fabric.Canvas | undefined;
   
     onMount(() => {
       canvas = new fabric.Canvas('my-canvas');

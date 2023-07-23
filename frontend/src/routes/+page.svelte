@@ -1,8 +1,10 @@
-<script>
+<script lang='ts'>
 	import Drawing from './Drawing.svelte';
 	import Canvas from './Canvas.svelte';
+	import Save from './Save.svelte';
 	// import welcome from '$lib/images/svelte-welcome.webp';
 	// import welcome_fallback from '$lib/images/svelte-welcome.png';
+	let canvas: any;
 </script>
 
 <svelte:head>
@@ -11,8 +13,7 @@
 </svelte:head>
 
 <section>
-	<Canvas />
-	<Drawing />
+	<Save {canvas}/>
 </section>
 
 <style>

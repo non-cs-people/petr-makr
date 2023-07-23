@@ -47,6 +47,15 @@
         canvas.add(rect);
       }
     }
+  function removeSelected() {
+    if (canvas) {
+      const activeObject = canvas.getActiveObject();
+      if (activeObject) {
+        canvas.remove(activeObject);
+        canvas.discardActiveObject();
+      }
+    }
+  }
 </script>
 
 <main>
@@ -56,8 +65,9 @@
       <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
     {/if}
   </div>
-  <div class="add-button-container">
+  <div class="add-remove-button-container">
     <button on:click={addRectangle}>Add Rectangle</button>
+    <button on:click={removeSelected}>Remove Selected</button>
   </div>
   <canvas id="my-canvas" width="400" height="300" style="border: 1px solid #000;"></canvas>
 </main>
@@ -81,8 +91,8 @@
     margin-top: 10px;
   }
 
-  /* Flex container for "Add Rectangle" button */
-  .add-button-container {
+  /* Flex container for "Add Rectangle" and "Remove Selected" buttons */
+  .add-remove-button-container {
     margin-top: 10px;
   }
 

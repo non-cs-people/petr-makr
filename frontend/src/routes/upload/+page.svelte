@@ -66,7 +66,7 @@
     {/if}
   </div>
   <div class="add-remove-button-container">
-    <button on:click={addRectangle}>Add Rectangle</button>
+    <!-- <button on:click={addRectangle}>Add Rectangle</button> -->
     <button on:click={removeSelected}>Remove Selected</button>
   </div>
   <canvas id="my-canvas" width="400" height="300" style="border: 1px solid #000;"></canvas>

@@ -184,7 +184,7 @@
     <button on:click={(e) => {
         const data = canvas.toDataURL({format: 'png', quality: 1, multiplier: 4});
         const link = document.createElement('a');
-        link.download = 'dev-jeans.png';
+        link.download = 'my_petr.png';
         link.href = data;
         link.click();
         }}>save</button>

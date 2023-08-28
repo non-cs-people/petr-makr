@@ -2,10 +2,10 @@ version: '3'
 services:
   svelte-app:
     build:
-      context: .
+      context: ./
       dockerfile: frontend/dockerfile
     ports:
-      - "5000"  # Expose the development server port for Nginx to access
+      - "5173:5173"  # Expose the development server port for Nginx to access
 
   nginx:
     image: nginx:alpine

@@ -4,8 +4,8 @@ services:
     build:
       context: ./
       dockerfile: frontend/dockerfile
-    ports:
-      - "5173:5173"  # Expose the development server port for Nginx to access
+    # ports:
+    #   - "5173:5173"  # Expose the development server port for Nginx to access
 
   nginx:
     image: nginx:alpine

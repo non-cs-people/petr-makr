@@ -70,10 +70,24 @@
     function handleCanvasDraw() {
         if (file && imageURL && canvas) {
         fabric.Image.fromURL(imageURL, (img) => {
-            canvas.add(img);
-            canvas.renderAll();
+          const canvasWidth = canvas.getWidth();
+          const canvasHeight = canvas.getHeight();
+
+          // Calculate the desired dimensions (1/5 of canvas size)
+          const desiredWidth = canvasWidth / 5;
+          const desiredHeight = canvasHeight / 5;
+          img.scaleToWidth(desiredWidth);
+          img.scaleToHeight(desiredHeight);
+          canvas.add(img);
+          canvas.renderAll();
         });
         }
+    }
+    function changeDrawMode() {
+      if (canvas) {
+        canvas.isDrawingMode = !canvas.isDrawingMode;
+        canvas.renderAll();
+  }
     }
     function removeSelected() {
         if (canvas) {
@@ -235,6 +249,9 @@
     <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
     <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
     <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+    <button on:click={changeDrawMode}>Brush</button>
+    <button on:click={changeDrawMode}>Cursor</button>
+    <button on:click={removeSelected}>Remove Selected</button>
   </div>
 {/if}
 

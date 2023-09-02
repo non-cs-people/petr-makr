@@ -119,11 +119,35 @@
         canvas.renderAll();
       }
     }
+
+    function handleKeyPress(event: any) {
+      if (event.key === 'Enter') {
+        // Handle the Enter key press (or any other key as needed)
+        // For example, you can trigger the same action as the click event
+        showOption('drawing');
+      }
+    }
+    let selectedOption = '';
+      function showOption(option: any) {
+        selectedOption = option;
+      }
+
+
   </script>
   
   <style>
     #my-canvas {
         border: 1px solid #000;
+    }
+    #navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      height: 50px;
+      max-width: 600px;
+      width: 100%;
     }
   
     /* Style the container for canvas and controls */
@@ -164,28 +188,81 @@
     h2 {
         text-align: center;
     }
+    .petr-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
   
-  <h1>Drawing App</h1>
-  <div class="canvas-container">
-    <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
+<h1>Drawing App</h1>
+<div class="canvas-container">
+  <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
+<div id="navbar">
+  <div
+    class="nav-item"
+    on:click={() => showOption('drawing')}
+    on:keydown={handleKeyPress}
+    tabindex="0" 
+    role="button"
+  >
+    Drawing
+  </div>
+  <div
+    class="nav-item"
+    on:click={() => showOption('image')}
+    on:keydown={handleKeyPress}
+    tabindex="0"
+    role="button"
+  >
+    Image
+  </div>
+  <div
+    class="nav-item"
+    on:click={() => showOption('delete')}
+    on:keydown={handleKeyPress}
+    tabindex="0"
+    role="button"
+  >
+    Delete
+  </div>
+</div>
+</div>
+<!-- Conditionally render content based on the selected option -->
+{#if selectedOption === 'drawing'}
+  <div id="drawing-content" class="petr-options">
     <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
     <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
     <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+  </div>
+{/if}
+
+{#if selectedOption === 'image'}
+  <div id="image-content" class="petr-options">
     <input type="file" bind:this={inputImage} on:change={handleFileInput} />
     {#if imageURL}
       <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
     {/if}
     <button on:click={removeSelected}>Remove Selected</button>
+  </div>
+{/if}
+
+{#if selectedOption === 'delete'}
+  <div id="delete-content" class="petr-options">
     <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
   </div>
-  <div class="tab" class:selected={activateTab === 'download'}>
-    <h2>Save your creations!</h2>
-    <button on:click={(e) => {
-        const data = canvas.toDataURL({format: 'png', quality: 1, multiplier: 4});
-        const link = document.createElement('a');
-        link.download = 'my_petr.png';
-        link.href = data;
-        link.click();
-        }}>save</button>
+{/if}
+
+<!-- The rest of your HTML content -->
+<div class="tab" class:selected={activateTab === 'download'}>
+  <h2>Save your creations!</h2>
+  <button on:click={(e) => {
+      const data = canvas.toDataURL({format: 'png', quality: 1, multiplier: 4});
+      const link = document.createElement('a');
+      link.download = 'my_petr.png';
+      link.href = data;
+      link.click();
+  }}>save</button>
 </div>
+

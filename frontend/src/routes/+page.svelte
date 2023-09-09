@@ -146,6 +146,13 @@
         selectedOption = option;
       }
 
+    function savePicture(event: any) {
+      const data = canvas.toDataURL({format: 'png', quality: 1, multiplier: 4});
+      const link = document.createElement('a');
+      link.download = 'my_petr.png';
+      link.href = data;
+      link.click();
+    }
 
   </script>
   
@@ -274,12 +281,6 @@
 <!-- The rest of your HTML content -->
 <div class="tab" class:selected={activateTab === 'download'}>
   <h2>Save your creations!</h2>
-  <button on:click={(e) => {
-      const data = canvas.toDataURL({format: 'png', quality: 1, multiplier: 4});
-      const link = document.createElement('a');
-      link.download = 'my_petr.png';
-      link.href = data;
-      link.click();
-  }}>save</button>
+  <button on:click={savePicture}>save</button>
 </div>
 

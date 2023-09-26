@@ -147,32 +147,7 @@
       }
 
     function createAccessories() {
-      const newDiv = document.createElement("div");
-      newDiv.classList.add("makerow");
-
-      const div1 = document.createElement("div");
-      div1.textContent = "Head";
-      div1.classList.add("accessory-category")
-
-      const div2 = document.createElement("div");
-      div2.textContent = "Tops";
-      div2.classList.add("accessory-category")
-
-      const div3 = document.createElement("div");
-      div3.textContent = "Pants";
-      div3.classList.add("accessory-category")
-
-      const div4 = document.createElement("div");
-      div4.textContent = "Shoes";
-      div4.classList.add("accessory-category")
-
-      newDiv.appendChild(div1);
-      newDiv.appendChild(div2);
-      newDiv.appendChild(div3);
-      newDiv.appendChild(div4);
-
-      const editbox = document.getElementById("editbox");
-      editbox.appendChild(newDiv);
+      
     }
 
   </script>
@@ -183,26 +158,29 @@
     }
     #navbar {
       display: flex;
-      justify-content: space-around;
       flex-direction: column;
+      justify-content: space-around;
       color: black;
       width: 20%;
-      width: 20%;
-      padding: 10px;
-      
+      padding: 10px; 
     }
     #customize-bar{
       display: flex;
-      justify-content: space-around;
+      /* justify-content: space-around; */
       align-items: center;
       background-color: #29629F;
       color: white;
-      width: 600px;
-      max-width: 600px;
+      width: 80vw;
+      max-width: 800px;
+      min-width: 600px;
+      height: 30vh;
+      max-height: 300px;
+      min-height: 150px;
+      padding-top: 15px;
     }
     .nav-item{
-      border-radius: 5px;
-      padding: 5px;
+      border-radius: 3px;
+      /* padding: 5px; */
       background-color: #f8d447;
       margin: 2px;
       align-items: center;
@@ -280,7 +258,7 @@
     <div id="navbar">
       <div
         class="nav-item"
-        on:click={() => createAccessories()}
+        on:click={() => showOption('accessories')}
         on:keydown={createAccessories}
         tabindex="0"
         role="button"
@@ -316,36 +294,52 @@
       </div>
     </div>
     <div class="editbox" id="editbox">
+
+      <!-- Conditionally render content based on the selected option -->
+
+      {#if selectedOption === 'accessories'}
+        <div id="drawing-content" class="petr-options">
+          <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
+          <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+          <button on:click={changeDrawMode}>Brush</button>
+          <button on:click={changeDrawMode}>Cursor</button>
+          <button on:click={removeSelected}>Remove Selected</button>
+        </div>
+      {/if}
+
+      {#if selectedOption === 'drawing'}
+        <div id="drawing-content" class="petr-options">
+          <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
+          <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+          <button on:click={changeDrawMode}>Brush</button>
+          <button on:click={changeDrawMode}>Cursor</button>
+          <button on:click={removeSelected}>Remove Selected</button>
+        </div>
+      {/if}
+
+      {#if selectedOption === 'image'}
+        <div id="image-content" class="petr-options">
+          <input type="file" bind:this={inputImage} on:change={handleFileInput} />
+          {#if imageURL}
+            <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
+          {/if}
+          <button on:click={removeSelected}>Remove Selected</button>
+        </div>
+      {/if}
+
+      {#if selectedOption === 'delete'}
+        <div id="delete-content" class="petr-options">
+          <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
+        </div>
+      {/if}
     </div>
   </div>
 </div>
-<!-- Conditionally render content based on the selected option -->
-{#if selectedOption === 'drawing'}
-  <div id="drawing-content" class="petr-options">
-    <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-    <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
-    <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
-    <button on:click={changeDrawMode}>Brush</button>
-    <button on:click={changeDrawMode}>Cursor</button>
-    <button on:click={removeSelected}>Remove Selected</button>
-  </div>
-{/if}
 
-{#if selectedOption === 'image'}
-  <div id="image-content" class="petr-options">
-    <input type="file" bind:this={inputImage} on:change={handleFileInput} />
-    {#if imageURL}
-      <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
-    {/if}
-    <button on:click={removeSelected}>Remove Selected</button>
-  </div>
-{/if}
 
-{#if selectedOption === 'delete'}
-  <div id="delete-content" class="petr-options">
-    <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
-  </div>
-{/if}
+
 
 <!-- The rest of your HTML content -->
 <div class="tab" class:selected={activateTab === 'download'}>

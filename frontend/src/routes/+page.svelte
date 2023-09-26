@@ -146,6 +146,34 @@
         selectedOption = option;
       }
 
+    function createAccessories() {
+      const newDiv = document.createElement("div");
+      newDiv.classList.add("makerow");
+
+      const div1 = document.createElement("div");
+      div1.textContent = "Head";
+      div1.classList.add("accessory-category")
+
+      const div2 = document.createElement("div");
+      div2.textContent = "Tops";
+      div2.classList.add("accessory-category")
+
+      const div3 = document.createElement("div");
+      div3.textContent = "Pants";
+      div3.classList.add("accessory-category")
+
+      const div4 = document.createElement("div");
+      div4.textContent = "Shoes";
+      div4.classList.add("accessory-category")
+
+      newDiv.appendChild(div1);
+      newDiv.appendChild(div2);
+      newDiv.appendChild(div3);
+      newDiv.appendChild(div4);
+
+      const editbox = document.getElementById("editbox");
+      editbox.appendChild(newDiv);
+    }
 
   </script>
   
@@ -156,14 +184,37 @@
     #navbar {
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      background-color: #333;
-      color: white;
-      height: 50px;
-      max-width: 600px;
-      width: 100%;
+      flex-direction: column;
+      color: black;
+      width: 20%;
+      width: 20%;
+      padding: 10px;
+      
     }
-  
+    #customize-bar{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #29629F;
+      color: white;
+      width: 600px;
+      max-width: 600px;
+    }
+    .nav-item{
+      border-radius: 5px;
+      padding: 5px;
+      background-color: #f8d447;
+      margin: 2px;
+      align-items: center;
+    }
+    .editbox{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: #FFE993;
+      width: 80%;
+    }
+
     /* Style the container for canvas and controls */
     .canvas-container {
         display: flex;
@@ -208,40 +259,65 @@
       align-items: center;
       justify-content: center;
     }
+    .accessory-category{
+      border-radius: 10px;
+      padding: 5px;
+      color: white;
+      background-color: #29629F;
+      margin: 2px;
+      align-items: center;
+    }
+    .makerow{
+      display: flex;
+      flex-direction: row;
+    }
   </style>
   
 <h1>Drawing App</h1>
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
-<div id="navbar">
-  <div
-    class="nav-item"
-    on:click={() => showOption('drawing')}
-    on:keydown={handleKeyPress}
-    tabindex="0" 
-    role="button"
-  >
-    Drawing
+  <div id="customize-bar">
+    <div id="navbar">
+      <div
+        class="nav-item"
+        on:click={() => createAccessories()}
+        on:keydown={createAccessories}
+        tabindex="0"
+        role="button"
+      >
+        Accessories
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('drawing')}
+        on:keydown={handleKeyPress}
+        tabindex="0" 
+        role="button"
+      >
+        Drawing
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('image')}
+        on:keydown={handleKeyPress}
+        tabindex="0"
+        role="button"
+      >
+        Image
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('delete')}
+        on:keydown={handleKeyPress}
+        tabindex="0"
+        role="button"
+      >
+        Delete
+      </div>
+    </div>
+    <div class="editbox" id="editbox">
+    </div>
   </div>
-  <div
-    class="nav-item"
-    on:click={() => showOption('image')}
-    on:keydown={handleKeyPress}
-    tabindex="0"
-    role="button"
-  >
-    Image
-  </div>
-  <div
-    class="nav-item"
-    on:click={() => showOption('delete')}
-    on:keydown={handleKeyPress}
-    tabindex="0"
-    role="button"
-  >
-    Delete
-  </div>
-</div>
 </div>
 <!-- Conditionally render content based on the selected option -->
 {#if selectedOption === 'drawing'}

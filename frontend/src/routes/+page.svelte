@@ -57,18 +57,18 @@
       return 600;
     }
     function handleFileInput(event: Event) {
-        const inputElement = event.target as HTMLInputElement;
-        if (inputElement.files && inputElement.files.length > 0) {
-        file = inputElement.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            imageURL = reader.result as string;
-        };
-        reader.readAsDataURL(file);
-        }
+      const inputElement = event.target as HTMLInputElement;
+      if (inputElement.files && inputElement.files.length > 0) {
+      file = inputElement.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+          imageURL = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+      }
     }
     function handleCanvasDraw() {
-        if (file && imageURL && canvas) {
+      if (file && imageURL && canvas) {
         fabric.Image.fromURL(imageURL, (img) => {
           const canvasWidth = canvas.getWidth();
           const canvasHeight = canvas.getHeight();
@@ -81,27 +81,27 @@
           canvas.add(img);
           canvas.renderAll();
         });
-        }
+      }
     }
     function changeDrawMode() {
       if (canvas) {
         canvas.isDrawingMode = !canvas.isDrawingMode;
         canvas.renderAll();
-  }
+      }
     }
     function removeSelected() {
-        if (canvas) {
+      if (canvas) {
         const activeObject = canvas.getActiveObject();
         if (activeObject) {
-            canvas.remove(activeObject);
-            canvas.discardActiveObject();
+          canvas.remove(activeObject);
+          canvas.discardActiveObject();
         }
-        }
+      }
     }
     function updateCanvasBackground() {
-        if (canvas) {
+      if (canvas) {
         canvas.setBackgroundColor(backgroundColor, canvas.renderAll.bind(canvas));
-        }
+      }
     }
     // Function to handle the colorChange event from the color picker
     function handleColorChange(event: any) {
@@ -142,10 +142,20 @@
       }
     }
     let selectedOption = '';
-      function showOption(option: any) {
-        selectedOption = option;
-      }
-
+    function showOption(option: any) {
+      selectedOption = option;
+    }
+    
+    function addAcc() {
+      fabric.Image.fromURL('https://cdn.discordapp.com/attachments/1120856138271965264/1165798248817098753/appleWatch.png?ex=6548293a&is=6535b43a&hm=a777c3746e4935b54dc0f30c7393419953b016fb5720775af90d217abb02a0d0&', (img) => {
+        const canvasWidth = canvas.getWidth();
+        const canvasHeight = canvas.getHeight();
+        img.scaleToWidth(canvasWidth);
+        img.scaleToHeight(canvasHeight);
+        canvas.add(img);
+        canvas.renderAll();
+      });
+    }
 
   </script>
   
@@ -221,7 +231,7 @@
     tabindex="0" 
     role="button"
   >
-    Drawing
+  Drawing
   </div>
   <div
     class="nav-item"
@@ -230,7 +240,7 @@
     tabindex="0"
     role="button"
   >
-    Image
+  Image
   </div>
   <div
     class="nav-item"
@@ -239,8 +249,17 @@
     tabindex="0"
     role="button"
   >
-    Delete
+  Delete
   </div>
+  <div
+  class="nav-item"
+  on:click={() => showOption('accessories')}
+  on:keydown={handleKeyPress}
+  tabindex="0"
+  role="button"
+>
+  Accessories
+</div>
 </div>
 </div>
 <!-- Conditionally render content based on the selected option -->
@@ -271,7 +290,12 @@
   </div>
 {/if}
 
-<!-- The rest of your HTML content -->
+{#if selectedOption === 'accessories'}
+  <div id="acc-content" class="petr-options">
+    <button id="add-acc" on:click={addAcc}>Apple Watch</button>
+  </div>
+{/if}
+
 <div class="tab" class:selected={activateTab === 'download'}>
   <h2>Save your creations!</h2>
   <button on:click={(e) => {

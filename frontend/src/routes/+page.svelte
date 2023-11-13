@@ -162,12 +162,13 @@
       justify-content: space-around;
       color: black;
       width: 20%;
-      padding: 10px; 
+      height: 100%;
+      /* padding: 10px;  */
     }
     #customize-bar{
       display: flex;
       /* justify-content: space-around; */
-      align-items: center;
+      align-items: stretch;
       background-color: #29629F;
       color: white;
       width: 80vw;
@@ -179,11 +180,17 @@
       padding-top: 15px;
     }
     .nav-item{
-      border-radius: 3px;
-      /* padding: 5px; */
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      flex-shrink: 0; 
+      flex-basis: auto; 
+      border-radius: 20px;
       background-color: #f8d447;
       margin: 2px;
-      align-items: center;
+      align-content: center;
+      height: auto;
+      justify-content: center;
     }
     .editbox{
       display: flex;
@@ -219,7 +226,7 @@
         border: none;
         cursor: pointer;
         margin:0 auto;
-        display: block;
+        display: flex;
     }
     .add-remove-button-container {
         margin-top: 10px;
@@ -241,6 +248,9 @@
     .drawing-content{
       display: flex;
       flex-direction: column;
+      align-items: center;  
+      justify-content: center; 
+      margin: 5px 0;
       width: 70%;
     }
     .accessory-category{

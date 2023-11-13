@@ -94,6 +94,10 @@ button:focus:not(:focus-visible) {
 	}
 }
 
+.drawing-content{
+	display: flex;
+}
+
 .visually-hidden {
 	border: 0;
 	clip: rect(0 0 0 0);

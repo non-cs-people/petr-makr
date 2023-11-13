@@ -190,7 +190,7 @@
       flex-direction: column;
       justify-content: space-around;
       background-color: #FFE993;
-      width: 80%;
+      width: 70%;
     }
 
     /* Style the container for canvas and controls */
@@ -236,6 +236,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    .drawing-content{
+      display: flex;
+      flex-direction: column;
+      width: 70%;
     }
     .accessory-category{
       border-radius: 10px;
@@ -298,13 +304,7 @@
       <!-- Conditionally render content based on the selected option -->
 
       {#if selectedOption === 'accessories'}
-        <div id="drawing-content" class="petr-options">
-          <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-          <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
-          <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
-          <button on:click={changeDrawMode}>Brush</button>
-          <button on:click={changeDrawMode}>Cursor</button>
-          <button on:click={removeSelected}>Remove Selected</button>
+        <div id="" class="petr-options">
         </div>
       {/if}
 

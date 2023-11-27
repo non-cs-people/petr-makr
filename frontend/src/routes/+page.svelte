@@ -146,24 +146,82 @@
         selectedOption = option;
       }
 
+    function createAccessories() {
+      
+    }
 
   </script>
   
+
+  <svelte:head>
+    <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+</svelte:head>
+
   <style>
+    .header {
+      display: flex;
+      background: #29629F;
+      margin: 20px 0px;
+    }
+
+    .header-title {
+      color: white;
+      padding: 20px;
+      font-family: 'Manrope', sans-serif;
+    }
+
     #my-canvas {
         border: 1px solid #000;
     }
     #navbar {
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
-      align-items: center;
-      background-color: #333;
-      color: white;
-      height: 50px;
-      max-width: 600px;
-      width: 100%;
+      font-weight: bold;
+      color: black;
+      width: 20%;
+      height: 100%;
+      /* padding: 10px;  */
     }
-  
+    #customize-bar{
+      display: flex;
+      /* justify-content: space-around; */
+      align-items: stretch;
+      background-color: #29629F;
+      color: white;
+      width: 80vw;
+      max-width: 800px;
+      min-width: 600px;
+      height: 30vh;
+      max-height: 300px;
+      min-height: 150px;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .nav-item{
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      flex-shrink: 0; 
+      flex-basis: auto; 
+      border-radius: 20px;
+      background-color: #f8d447;
+      margin: 2px;
+      align-content: center;
+      height: auto;
+      justify-content: center;
+    }
+    .editbox{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: #FFE993;
+      width: 70%;
+      padding: 30px;
+      margin-left: 10px;
+    }
+
     /* Style the container for canvas and controls */
     .canvas-container {
         display: flex;
@@ -190,7 +248,7 @@
         border: none;
         cursor: pointer;
         margin:0 auto;
-        display: block;
+        display: flex;
     }
     .add-remove-button-container {
         margin-top: 10px;
@@ -208,68 +266,117 @@
       align-items: center;
       justify-content: center;
     }
+
+    .drawing-content{
+      display: flex;
+      flex-direction: column;
+      align-items: center;  
+      justify-content: center; 
+      margin: 5px 0;
+      width: 70%;
+    }
+    .accessory-category{
+      border-radius: 10px;
+      padding: 5px;
+      color: white;
+      background-color: #29629F;
+      margin: 2px;
+      align-items: center;
+    }
+    .makerow{
+      display: flex;
+      flex-direction: row;
+    }
   </style>
-  
-<h1>Drawing App</h1>
+
+<div class="header">
+  <h1 class="header-title">Petr Maker</h1>
+</div>
+
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
-<div id="navbar">
-  <div
-    class="nav-item"
-    on:click={() => showOption('drawing')}
-    on:keydown={handleKeyPress}
-    tabindex="0" 
-    role="button"
-  >
-    Drawing
-  </div>
-  <div
-    class="nav-item"
-    on:click={() => showOption('image')}
-    on:keydown={handleKeyPress}
-    tabindex="0"
-    role="button"
-  >
-    Image
-  </div>
-  <div
-    class="nav-item"
-    on:click={() => showOption('delete')}
-    on:keydown={handleKeyPress}
-    tabindex="0"
-    role="button"
-  >
-    Delete
+  <div id="customize-bar">
+    <div id="navbar">
+      <div
+        class="nav-item"
+        on:click={() => showOption('accessories')}
+        on:keydown={createAccessories}
+        tabindex="0"
+        role="button"
+      >
+        Accessories
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('drawing')}
+        on:keydown={handleKeyPress}
+        tabindex="0" 
+        role="button"
+      >
+        Drawing
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('image')}
+        on:keydown={handleKeyPress}
+        tabindex="0"
+        role="button"
+      >
+        Image
+      </div>
+      <div
+        class="nav-item"
+        on:click={() => showOption('delete')}
+        on:keydown={handleKeyPress}
+        tabindex="0"
+        role="button"
+      >
+        Delete
+      </div>
+    </div>
+    <div class="editbox" id="editbox">
+
+      <!-- Conditionally render content based on the selected option -->
+
+      {#if selectedOption === 'accessories'}
+        <div id="" class="petr-options">
+        </div>
+      {/if}
+
+      {#if selectedOption === 'drawing'}
+        <div id="drawing-content" class="petr-options">
+          <div class="pen_color">
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          </div>
+          <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
+          <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+          <button on:click={changeDrawMode}>Brush</button>
+          <button on:click={changeDrawMode}>Cursor</button>
+          <button on:click={removeSelected}>Remove Selected</button>
+        </div>
+      {/if}
+
+      {#if selectedOption === 'image'}
+        <div id="image-content" class="petr-options">
+          <input type="file" bind:this={inputImage} on:change={handleFileInput} />
+          {#if imageURL}
+            <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
+          {/if}
+          <button on:click={removeSelected}>Remove Selected</button>
+        </div>
+      {/if}
+
+      {#if selectedOption === 'delete'}
+        <div id="delete-content" class="petr-options">
+          <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
-</div>
-<!-- Conditionally render content based on the selected option -->
-{#if selectedOption === 'drawing'}
-  <div id="drawing-content" class="petr-options">
-    <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-    <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
-    <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
-    <button on:click={changeDrawMode}>Brush</button>
-    <button on:click={changeDrawMode}>Cursor</button>
-    <button on:click={removeSelected}>Remove Selected</button>
-  </div>
-{/if}
 
-{#if selectedOption === 'image'}
-  <div id="image-content" class="petr-options">
-    <input type="file" bind:this={inputImage} on:change={handleFileInput} />
-    {#if imageURL}
-      <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
-    {/if}
-    <button on:click={removeSelected}>Remove Selected</button>
-  </div>
-{/if}
 
-{#if selectedOption === 'delete'}
-  <div id="delete-content" class="petr-options">
-    <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
-  </div>
-{/if}
+
 
 <!-- The rest of your HTML content -->
 <div class="tab" class:selected={activateTab === 'download'}>

@@ -152,7 +152,24 @@
 
   </script>
   
+
+  <svelte:head>
+    <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+</svelte:head>
+
   <style>
+    .header {
+      display: flex;
+      background: #29629F;
+      margin: 20px 0px;
+    }
+
+    .header-title {
+      color: white;
+      padding: 20px;
+      font-family: 'Manrope', sans-serif;
+    }
+
     #my-canvas {
         border: 1px solid #000;
     }
@@ -160,6 +177,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      font-weight: bold;
       color: black;
       width: 20%;
       height: 100%;
@@ -177,8 +195,10 @@
       height: 30vh;
       max-height: 300px;
       min-height: 150px;
-      padding-top: 15px;
+      padding: 20px;
+      margin: 20px;
     }
+
     .nav-item{
       display: flex;
       flex-wrap: wrap;
@@ -198,6 +218,8 @@
       justify-content: space-around;
       background-color: #FFE993;
       width: 70%;
+      padding: 30px;
+      margin-left: 10px;
     }
 
     /* Style the container for canvas and controls */
@@ -266,8 +288,11 @@
       flex-direction: row;
     }
   </style>
-  
-<h1>Drawing App</h1>
+
+<div class="header">
+  <h1 class="header-title">Petr Maker</h1>
+</div>
+
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
   <div id="customize-bar">
@@ -320,7 +345,13 @@
 
       {#if selectedOption === 'drawing'}
         <div id="drawing-content" class="petr-options">
-          <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          <div class="pen_color">
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          </div>
           <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
           <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
           <button on:click={changeDrawMode}>Brush</button>

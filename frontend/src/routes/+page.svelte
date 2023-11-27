@@ -347,10 +347,6 @@
         <div id="drawing-content" class="petr-options">
           <div class="pen_color">
             <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
-            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
           </div>
           <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
           <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />

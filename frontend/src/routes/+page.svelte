@@ -182,7 +182,24 @@
 
   </script>
   
+
+  <svelte:head>
+    <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+</svelte:head>
+
   <style>
+    .header {
+      display: flex;
+      background: #29629F;
+      margin: 20px 0px;
+    }
+
+    .header-title {
+      color: white;
+      padding: 20px;
+      font-family: 'Manrope', sans-serif;
+    }
+
     #my-canvas {
         border: 1px solid #000;
     }
@@ -190,9 +207,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      font-weight: bold;
       color: black;
       width: 20%;
-      padding: 10px; 
+      height: 100%;
+      /* padding: 10px;  */
     }
     #customize-bar{
       display: flex;
@@ -205,8 +224,10 @@
       height: 30vh;
       max-height: 300px;
       min-height: 150px;
-      padding-top: 15px;
+      padding: 20px;
+      margin: 20px;
     }
+
     .nav-item{
       display: flex;
       flex-wrap: wrap;
@@ -217,7 +238,9 @@
       border-radius: 20px;
       background-color: #f8d447;
       margin: 2px;
-      align-items: center;
+      align-content: center;
+      height: auto;
+      justify-content: center;
     }
     .nav-item:active {
       background-color: aqua;
@@ -257,7 +280,7 @@
         border: none;
         cursor: pointer;
         margin:0 auto;
-        display: block;
+        display: flex;
     }
     .add-remove-button-container {
         margin-top: 10px;
@@ -281,6 +304,9 @@
     .drawing-content{
       display: flex;
       flex-direction: column;
+      align-items: center;  
+      justify-content: center; 
+      margin: 5px 0;
       width: 70%;
     }
     .accessory-category{
@@ -319,8 +345,11 @@
       background-color: #007bff;
     } */
   </style>
-  
-<h1>Drawing App</h1>
+
+<div class="header">
+  <h1 class="header-title">Petr Maker</h1>
+</div>
+
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
   <div id="customize-bar">
@@ -377,7 +406,9 @@
 
       {#if selectedOption === 'drawing'}
         <div id="drawing-content" class="petr-options">
-          <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          <div class="pen_color">
+            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+          </div>
           <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
           <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
           <button on:click={changeDrawMode}>Brush</button>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Styling for the navigation bar */
+  #navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    height: 50px;
+  }
+
+  /* Styling for the content area */
+  #content {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  /* Hide content by default */
+  .country-content {
+    display: none;
+  }
+
+  /* Show content when active */
+  .country-content.active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div id="navbar">
+  <div class="nav-item" onclick="showCountry('korea')">Korea</div>
+  <div class="nav-item" onclick="showCountry('china')">China</div>
+  <div class="nav-item" onclick="showCountry('japan')">Japan</div>
+</div>
+
+<div id="content">
+  <div id="korea-content" class="country-content">
+    <img src="korea-flag.png" alt="Korea Flag">
+  </div>
+  <div id="china-content" class="country-content">
+    <img src="china-flag.png" alt="China Flag">
+  </div>
+  <div id="japan-content" class="country-content">
+    <img src="japan-flag.png" alt="Japan Flag">
+  </div>
+</div>
+
+<script>
+  function showCountry(country) {
+    // Hide all country content
+    const countryContents = document.querySelectorAll('.country-content');
+    countryContents.forEach(content => content.classList.remove('active'));
+
+    // Show the selected country content
+    const selectedContent = document.getElementById(`${country}-content`);
+    selectedContent.classList.add('active');
+  }
+</script>
+</body>
+</html>

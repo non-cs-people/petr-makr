@@ -147,7 +147,7 @@
     }
     
     function addAcc() {
-      fabric.Image.fromURL('https://cdn.discordapp.com/attachments/1120856138271965264/1165798248817098753/appleWatch.png?ex=6548293a&is=6535b43a&hm=a777c3746e4935b54dc0f30c7393419953b016fb5720775af90d217abb02a0d0&', (img) => {
+      fabric.Image.fromURL('https://cdn.discordapp.com/attachments/1165802285448831086/1165802470866423949/boba_1.png?ex=65482d28&is=6535b828&hm=d17b5bfa199de613c76e50f99493b8c87f87b84766e2ecf9eadb9d3b23197dc8&', (img) => {
         const canvasWidth = canvas.getWidth();
         const canvasHeight = canvas.getHeight();
         img.scaleToWidth(canvasWidth);

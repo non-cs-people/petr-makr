@@ -196,7 +196,7 @@
     }
     #customize-bar{
       display: flex;
-      align-items: center;
+      align-items: stretch;
       background-color: #29629F;
       color: white;
       width: 80vw;
@@ -208,10 +208,19 @@
       padding-top: 15px;
     }
     .nav-item{
-      border-radius: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-grow: 1;
+      flex-shrink: 0; 
+      flex-basis: auto; 
+      border-radius: 20px;
       background-color: #f8d447;
       margin: 2px;
       align-items: center;
+    }
+    .nav-item:active {
+      background-color: aqua;
     }
     .editbox {
       display: flex;

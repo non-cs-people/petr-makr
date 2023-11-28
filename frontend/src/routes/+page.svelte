@@ -169,14 +169,21 @@
     function showAccessory(option: string) {
       let imgURL : string | undefined = accMap.get(option)
       if (imgURL) {
-        fabric.Image.fromURL(imgURL, (img) => {
+        let imgElement = new Image();
+        imgElement.crossOrigin = 'Anonymous';
+        imgElement.src = imgURL;
+        imgElement.onload = function() {
+          let imgInstance = new fabric.Image(imgElement, {
+            left: 0,
+            top: 0,
+          });
           const canvasWidth = canvas.getWidth();
           const canvasHeight = canvas.getHeight();
-          img.scaleToWidth(canvasWidth);
-          img.scaleToHeight(canvasHeight);
-          canvas.add(img);
+          imgInstance.scaleToWidth(canvasWidth);
+          imgInstance.scaleToHeight(canvasHeight);
+          canvas.add(imgInstance);
           canvas.renderAll();
-        });
+        }
       }
     }
 

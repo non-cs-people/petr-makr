@@ -15,7 +15,7 @@
   
     onMount(() => {
         canvas = new fabric.Canvas('my-canvas', { 
-            isDrawingMode: true,
+            isDrawingMode: false,
             backgroundColor: backgroundColor
         });
         // Set the initial color and brush size for the canvas drawing brush

@@ -188,13 +188,18 @@
     }
 
   </script>
-  
 
   <svelte:head>
     <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
 </svelte:head>
 
   <style>
+    :global(body) {
+      display: flex;
+      margin: auto;
+    }
+
+
     .header {
       display: flex;
       background: #29629F;
@@ -351,6 +356,16 @@
     .button-grid button:active {
       background-color: #007bff;
     } */
+
+    @media (min-width: 360px) and (max-width: 374px) {
+      .header {
+        width: 100%;
+      }
+
+      .canvas-container {
+        width: 100%;
+      }
+    }
   </style>
 
 <div class="header">

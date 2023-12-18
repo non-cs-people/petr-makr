@@ -209,7 +209,7 @@
     .header {
       display: flex;
       background: #29629F;
-      margin: 20px 0px;
+      margin: 1vw 2vw;
       max-width: 100%;
     }
 

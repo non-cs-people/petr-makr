@@ -230,8 +230,17 @@
       color: black;
       width: 20%;
       height: 100%;
-      /* padding: 10px;  */
+
     }
+
+    #bg {
+      display: flex;
+      background-color: #FFE993;
+      justify-content: right;
+      /* width: 80%;
+      height: 100%; */
+    }
+
     #customize-bar{
       display: flex;
       align-items: stretch;
@@ -246,20 +255,21 @@
       padding: 2vh;
       margin: 20px;
     }
-
+    
+    .button-grid {
+      padding: 1vh 6vw;
+    }
     .nav-item{
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      flex-grow: 1;
-      flex-shrink: 0; 
-      flex-basis: auto; 
       border-radius: 20px;
       background-color: #f8d447;
-      margin: 2px;
-      align-content: center;
-      height: auto;
       justify-content: center;
+
+      height: 3vh;
+      width: 4vw;
+    
+      padding: 1vh 5vw;
+      margin: 2vh;
     }
     .nav-item:active {
       background-color: aqua;
@@ -268,7 +278,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      background-color: #FFE993;
       width: 70%;
       height: 80%;
     }
@@ -355,6 +364,8 @@
       margin: 5px;
       overflow: auto;
     }
+
+
     /* .button-grid button {
       padding: 10px;
       border: 1px solid #ccc;
@@ -383,6 +394,8 @@
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} on:drawing={handleDrawing}></canvas> 
   <div id="customize-bar">
+    <div id="bg">
+    </div>
     <div id="navbar">
       <div
         class="nav-item"

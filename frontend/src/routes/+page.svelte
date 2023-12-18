@@ -278,8 +278,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 100%;
-        height: auto;
+        width: 100%;
     }
   
     /* Style the color picker input */

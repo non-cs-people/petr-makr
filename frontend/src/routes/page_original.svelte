@@ -190,27 +190,21 @@
   </script>
 
   <svelte:head>
-    <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
-        display: block;
+        display: flex;
         margin: 0px;
       }
     </style>
 </svelte:head>
 
   <style>
-    /* :global(body) {
-      display: flex;
-      margin: auto;
-    } */
-
     .header {
       display: flex;
       background: #29629F;
       margin: 20px 0px;
-      max-width: 100%;
     }
 
     .header-title {
@@ -237,13 +231,13 @@
       align-items: stretch;
       background-color: #29629F;
       color: white;
-      width: 90vw;
-      /* max-width: 800px;
+      width: 80vw;
+      max-width: 800px;
       min-width: 600px;
       height: 30vh;
       max-height: 300px;
-      min-height: 150px; */
-      padding: 2vh;
+      min-height: 150px;
+      padding: 20px;
       margin: 20px;
     }
 
@@ -278,8 +272,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 100%;
-        height: auto;
     }
   
     /* Style the color picker input */
@@ -378,11 +370,11 @@
   </style>
 
 <div class="header">
-  <h1 class="header-title">Petr Maker</h1>
+  <h1 class="header-title">Petr Makr</h1>
 </div>
 
 <div class="canvas-container">
-  <canvas id="my-canvas" bind:this={canvas} on:drawing={handleDrawing}></canvas> 
+  <canvas id="my-canvas" bind:this={canvas} width="2400" height="2400" on:drawing={handleDrawing}></canvas>
   <div id="customize-bar">
     <div id="navbar">
       <div

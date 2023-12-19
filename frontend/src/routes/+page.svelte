@@ -225,7 +225,7 @@
     #navbar {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
       font-weight: bold;
       color: black;
       width: 20%;
@@ -236,9 +236,12 @@
     #bg {
       display: flex;
       background-color: #FFE993;
-      justify-content: right;
-      /* width: 80%;
-      height: 100%; */
+      color: #FFE993;
+      justify-content: center;
+      width: 80%;
+      height: 100%;
+      padding: 3vh;
+      margin: 1vh;
     }
 
     #customize-bar{
@@ -277,9 +280,9 @@
     .editbox {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      width: 70%;
-      height: 80%;
+      justify-content: center;
+      /* width: 70%;
+      height: 80%; */
     }
 
     /* Style the container for canvas and controls */
@@ -290,6 +293,19 @@
         width: 100%;
     }
   
+    #image-content {
+      display: flex;
+      justify-content: center;
+      height: 100%
+    }
+
+    #image-file-selector {
+      display: flex;
+      justify-content: right;
+      width: 60%;
+      margin: 1vh;
+    }
+
     /* Style the color picker input */
     #color_picker {
          margin-top: 10px;
@@ -376,7 +392,7 @@
       background-color: #007bff;
     } */
 
-    @media (min-width: 360px) and (max-width: 374px) {
+    /* @media (min-width: 360px) and (max-width: 374px) {
       .header {
         width: 100%;
       }
@@ -384,7 +400,7 @@
       .canvas-container {
         width: 100%;
       }
-    }
+    } */
   </style>
 
 <div class="header">
@@ -394,8 +410,6 @@
 <div class="canvas-container">
   <canvas id="my-canvas" bind:this={canvas} on:drawing={handleDrawing}></canvas> 
   <div id="customize-bar">
-    <div id="bg">
-    </div>
     <div id="navbar">
       <div
         class="nav-item"
@@ -434,47 +448,50 @@
         Delete
       </div>
     </div>
-    <div class="editbox" id="editbox">
 
-      <!-- Conditionally render content based on the selected option -->
+    <div id="bg">
+      <div class="editbox" id="editbox">
 
-      {#if selectedOption === 'accessories'}
-        <div class="button-grid">
-          {#each Array.from(accMap) as [option, url]}
-            <button class="acc-content" on:click={() => showAccessory(option)}> {option} </button>
-          {/each}
-
-        </div>
-      {/if}
-
-      {#if selectedOption === 'drawing'}
-        <div id="drawing-content" class="petr-options">
-          <div class="pen_color">
-            <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+        <!-- Conditionally render content based on the selected option -->
+  
+        {#if selectedOption === 'accessories'}
+          <div class="button-grid">
+            {#each Array.from(accMap) as [option, url]}
+              <button class="acc-content" on:click={() => showAccessory(option)}> {option} </button>
+            {/each}
+  
           </div>
-          <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
-          <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
-          <button on:click={changeDrawMode}>Brush</button>
-          <button on:click={changeDrawMode}>Cursor</button>
-          <button on:click={removeSelected}>Remove Selected</button>
-        </div>
-      {/if}
-
-      {#if selectedOption === 'image'}
-        <div id="image-content" class="petr-options">
-          <input type="file" bind:this={inputImage} on:change={handleFileInput} />
-          {#if imageURL}
-            <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
-          {/if}
-          <button on:click={removeSelected}>Remove Selected</button>
-        </div>
-      {/if}
-
-      {#if selectedOption === 'delete'}
-        <div id="delete-content" class="petr-options">
-          <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
-        </div>
-      {/if}
+        {/if}
+  
+        {#if selectedOption === 'drawing'}
+          <div id="drawing-content" class="petr-options">
+            <div class="pen_color">
+              <input id="color_picker" type="color" bind:value={selectedColor} on:change={handleColorChange} />
+            </div>
+            <input id="color-container" type="color" bind:value={backgroundColor} on:change={updateCanvasBackground} />
+            <input id="brush_size_picker" type="range" min="1" max="20" step="1" bind:value={brushSize} on:input={handleBrushSizeChange} />
+            <button on:click={changeDrawMode}>Brush</button>
+            <button on:click={changeDrawMode}>Cursor</button>
+            <button on:click={removeSelected}>Remove Selected</button>
+          </div>
+        {/if}
+  
+        {#if selectedOption === 'image'}
+          <div id="image-content" class="petr-options">
+            <input id="image-file-selector" type="file" bind:this={inputImage} on:change={handleFileInput} />
+            {#if imageURL}
+              <button on:click={handleCanvasDraw}>Draw Image on Canvas</button>
+            {/if}
+            <button on:click={removeSelected}>Remove Selected</button>
+          </div>
+        {/if}
+  
+        {#if selectedOption === 'delete'}
+          <div id="delete-content" class="petr-options">
+            <button id="add-remove-button-container" on:click={clearCanvas}>Clear Canvas</button>
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </div>

@@ -230,18 +230,15 @@
       color: black;
       width: 20%;
       height: 100%;
-
     }
 
     #bg {
       display: flex;
       background-color: #FFE993;
-      color: #FFE993;
       justify-content: center;
-      width: 80%;
-      height: 100%;
+      width: 100%;
       padding: 3vh;
-      margin: 1vh;
+      margin: 2vh;
     }
 
     #customize-bar{
